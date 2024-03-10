@@ -25,6 +25,11 @@ function setCurrentUser(user: User | null) {
   console.log({ currentUser: currentUser.value });
 }
 
+const modal = ref(false);
+function toggleModal() {
+  modal.value = !modal.value;
+  console.log({ modal: modal.value });
+}
 </script>
 
 
@@ -63,7 +68,7 @@ function setCurrentUser(user: User | null) {
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a v-if="currentUser == null" class="button is-primary">
+            <a @click="toggleModal" v-if="currentUser == null" class="button is-primary">
               <strong>Sign up</strong>
             </a>
             <div @click="toggleMenuLogin" :class="{ 'dropdown is-active': isActiveLogin }" class="is-right">
@@ -98,15 +103,55 @@ function setCurrentUser(user: User | null) {
       </div>
     </div>
   </nav>
+  <div class="modal" :class="{ 'is-active': modal }">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h1 class="title">Sign Up</h1>
+        <div class="field">
+          <label class="label">First Name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="First Name">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Last Name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="Email">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button @click="toggleModal" class="button is-primary">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button @click="toggleModal" class="modal-close is-large" aria-label="close"></button>
+  </div>
 </template>
 <style scoped>
 .router-link-active {
   border-bottom: 2px solid rgb(107, 230, 204);
 }
+
 .profile-image {
   padding-right: 10px;
   width: auto;
 }
+
 .navbar {
   height: 25px;
 }
