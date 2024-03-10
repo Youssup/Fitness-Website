@@ -31,7 +31,7 @@ function setCurrentUser(user: User | null) {
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <RouterLink to="home" class="navbar-item">
+      <RouterLink to="/" class="navbar-item">
         Fitness App
       </RouterLink>
       <a role="button" @click="toggleMenu" :class="{ 'is-active': isActive }" class="navbar-burger" aria-label="menu"
@@ -44,7 +44,7 @@ function setCurrentUser(user: User | null) {
 
     <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">
       <div class="navbar-start">
-        <RouterLink to="home" class="navbar-item">
+        <RouterLink to="/" class="navbar-item">
           Home
         </RouterLink>
 
@@ -63,10 +63,10 @@ function setCurrentUser(user: User | null) {
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a v-if="currentUser==null" class="button is-primary">
+            <a v-if="currentUser == null" class="button is-primary">
               <strong>Sign up</strong>
             </a>
-            <div @click="toggleMenuLogin" :class="{ 'dropdown is-active': isActiveLogin }" class="is-right"> 
+            <div @click="toggleMenuLogin" :class="{ 'dropdown is-active': isActiveLogin }" class="is-right">
               <div class="dropdown-trigger">
                 <button v-if="currentUser == null" class="button is-primary" aria-haspopup="true"
                   aria-controls="dropdown-menu">
@@ -87,20 +87,27 @@ function setCurrentUser(user: User | null) {
               </div>
             </div>
           </div>
-          <a v-if="currentUser!=null" class="navbar-item">
-              <strong>{{ currentUser.firstName + " " + currentUser.lastName }}</strong>
-            </a>
-            <button @click="setCurrentUser(null)" v-if="currentUser!=null" class="button is-primary">
-              <strong>Logout</strong>
-            </button>
+          <a v-if="currentUser != null" class="navbar-item">
+            <strong>{{ currentUser.firstName + " " + currentUser.lastName }}</strong>
+          </a>
+          <img v-if="currentUser != null" :src="currentUser.profileImage" class="profile-image" />
+          <button @click="setCurrentUser(null)" v-if="currentUser != null" class="button is-primary">
+            <strong>Logout</strong>
+          </button>
         </div>
       </div>
     </div>
   </nav>
 </template>
-
 <style scoped>
 .router-link-active {
   border-bottom: 2px solid rgb(107, 230, 204);
+}
+.profile-image {
+  padding-right: 10px;
+  width: auto;
+}
+.navbar {
+  height: 25px;
 }
 </style>
