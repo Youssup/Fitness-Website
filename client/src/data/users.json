@@ -4,30 +4,37 @@
             "id": 1,
             "firstName": "Terry",
             "lastName": "Medhurst",
+            "admin": false,
             "caloriesBurned": 6726,
-            "distance": 7.8
-
+            "distance": 7.8,
+            "profileImage": "http://www.gravatar.com/avatar/"
         },
         {
             "id": 2,
             "firstName": "Jerry",
             "lastName": "Medhurst",
             "caloriesBurned": 6820,
-            "distance": 8.3
+            "admin": false,
+            "distance": 8.3,
+            "profileImage": "http://www.gravatar.com/avatar/"
         },
         {
             "id": 3,
             "firstName": "Barry",
             "lastName": "Medhurst",
+            "admin": false,
             "caloriesBurned": 5028,
-            "distance": 6.8
+            "distance": 6.8,
+            "profileImage": "http://www.gravatar.com/avatar/"
         },
         {
             "id": 4,
             "firstName": "Yousup",
             "lastName": "Song",
+            "admin": true,
             "caloriesBurned": 7324,
-            "distance": 9.2
+            "distance": 9.2,
+            "profileImage": "http://www.gravatar.com/avatar/"
         }
     ],
     "total": 100,
