@@ -53,10 +53,6 @@ function toggleModal() {
           Home
         </RouterLink>
 
-        <RouterLink to="admin" class="navbar-item">
-          Admin
-        </RouterLink>
-
         <RouterLink to="activities" class="navbar-item">
           Activities
         </RouterLink>
@@ -64,6 +60,11 @@ function toggleModal() {
         <RouterLink to="Friends" class="navbar-item">
           Friends Activities
         </RouterLink>
+
+        <RouterLink v-if="currentUser?.admin" to="admin" class="navbar-item">
+          Admin
+        </RouterLink>
+
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
