@@ -53,11 +53,11 @@ function toggleModal() {
           Home
         </RouterLink>
 
-        <RouterLink to="activities" class="navbar-item">
+        <RouterLink to="activities" v-if="currentUser" class="navbar-item">
           Activities
         </RouterLink>
 
-        <RouterLink to="Friends" class="navbar-item">
+        <RouterLink to="Friends" v-if="currentUser" class="navbar-item">
           Friends Activities
         </RouterLink>
 
@@ -87,6 +87,7 @@ function toggleModal() {
               <div class="dropdown-menu" id="dropdown-menu" role="menu">
                 <div class="dropdown-content">
                   <a @click="setCurrentUser(user)" v-for="user in users" class="dropdown-item">
+                    <img :src="user.profileImage" alt="Placeholder image">
                     {{ user.firstName + " " + user.lastName }}
                   </a>
                 </div>
@@ -119,12 +120,6 @@ function toggleModal() {
           <label class="label">Last Name</label>
           <div class="control">
             <input class="input" type="text" placeholder="Last Name">
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="email" placeholder="Email">
           </div>
         </div>
         <div class="field">
