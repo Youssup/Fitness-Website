@@ -5,8 +5,13 @@ import { ref } from 'vue';
 const users = ref([] as User[]);
 users.value = getUsers();
 
-function deleteUser (index: number)
-{
+const modal = ref(false);
+function toggleModal() {
+    modal.value = !modal.value;
+    console.log({ modal: modal.value });
+}
+
+function deleteUser(index: number) {
     users.value.splice(index, 1);
 }
 </script>
@@ -28,9 +33,36 @@ function deleteUser (index: number)
                     <p class="subtitle is-6">UserID: {{ user.id }}</p>
                 </div>
                 <div class="button-container">
+                    <button @click="toggleModal" class="button is-warning is-focused">Edit</button>
                     <button @click="deleteUser(index)" class="button is-danger is-focused">Delete</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal" :class="{ 'is-active': modal }">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <h1 class="title">Edit User</h1>
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button @click="toggleModal" class="button is-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button @click="toggleModal" class="modal-close is-large" aria-label="close"></button>
     </div>
 </template>
