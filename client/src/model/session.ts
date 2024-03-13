@@ -1,6 +1,7 @@
 import { type User } from "./users";
 import { reactive } from "vue";
 
+
 const session = reactive({
     user: null as User | null
 })

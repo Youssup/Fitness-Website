@@ -10,7 +10,7 @@ const session = getSession();
 <template>
   <div class="columns is-centered">
     <div class="column is-half">
-      <div class="card">
+      <div class="card" style="margin-top: 20px;">
         <header class="card-header">
           <p class="card-header-title">
             <img :src="session.user?.profileImage" alt="Placeholder image" class="image is-16x16">
@@ -19,8 +19,8 @@ const session = getSession();
         </header>
         <div class="card-content">
           <div class="content">
-            <p><strong>Calories Burned:</strong> {{ session.user?.caloriesBurned }}</p>
-            <p><strong>Distance:</strong> {{ session.user?.distance }}</p>
+            <p><strong>Calories Burned:</strong> {{ session.user?.activities.reduce((total, activity) => total + activity.caloriesBurned, 0) }}</p>
+            <p><strong>Distance:</strong> {{ session.user?.activities.reduce((total, activity) => total + activity.distance, 0) }}</p>
           </div>
         </div>
       </div>

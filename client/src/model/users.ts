@@ -5,8 +5,6 @@ export interface User {
   firstName: string
   lastName: string
   admin: boolean
-  caloriesBurned: number
-  distance: number
   profileImage: string
   activities: Activity[]
 }

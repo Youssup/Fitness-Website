@@ -5,8 +5,6 @@
             "firstName": "Terry",
             "lastName": "Medhurst",
             "admin": false,
-            "caloriesBurned": 0,
-            "distance": 0,
             "profileImage": "https://robohash.org/Mavis.png?set=set4",
             "activities": [
                 {
@@ -32,8 +30,6 @@
             "firstName": "Jerry",
             "lastName": "Medhurst",
             "admin": false,
-            "caloriesBurned": 0,
-            "distance": 0,
             "profileImage": "https://robohash.org/Terry.png?set=set4",
             "activities": [
                 {
@@ -59,8 +55,6 @@
             "firstName": "Barry",
             "lastName": "Medhurst",
             "admin": false,
-            "caloriesBurned": 0,
-            "distance": 0,
             "profileImage": "https://robohash.org/Terrill.png?set=set4",
             "activities": [
                 {
@@ -86,8 +80,6 @@
             "firstName": "Yousup",
             "lastName": "Song",
             "admin": true,
-            "caloriesBurned": 0,
-            "distance": 0,
             "profileImage": "https://robohash.org/jum.png?set=set4",
             "activities": [
                 {
