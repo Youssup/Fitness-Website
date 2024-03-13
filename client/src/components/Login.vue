@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { type User, getUsers } from "../model/users";
-import { getSession } from '../model/session'
+import { type User, getUsers} from "../model/users";
+import { getSession, login } from '../model/session'
 import { ref } from "vue";
-
 let isActiveLogin = ref(false);
 function toggleMenuLogin() {
     isActiveLogin.value = !isActiveLogin.value;
@@ -44,7 +43,7 @@ const users = getUsers()
                     <div class="dropdown-content">
                         <div v-for="user in users" class="dropdown-item" style="display: inline-flex;">
                             <img :src="user.profileImage" alt="Placeholder image" class="dropdown-item">
-                            <a @click.prevent="session.user = user" class="dropdown-item">
+                            <a @click.prevent="login(user)" class="dropdown-item">
                                 {{ user.firstName + " " + user.lastName }}
                             </a>
                         </div>
@@ -84,7 +83,7 @@ const users = getUsers()
                 </div>
             </div>
         </div>
-        <button @click="toggleModal" class="modal-close is-large" aria-label="close"></button>
+        <button @click="toggleModal()" class="modal-close is-large" aria-label="close"></button>
     </div>
 </template>
 

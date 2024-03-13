@@ -24,3 +24,8 @@ export interface Activity {
   export function getUsers(): User[] {
     return data.users;
 }
+
+export function editUser(user: User) {
+  const index = data.users.findIndex(u => u.id === user.id);
+  data.users[index] = user;
+}

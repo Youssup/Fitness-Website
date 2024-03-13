@@ -10,5 +10,5 @@ export function getSession(){
 }
 
 export function login(user: User | null){
-    session.user = user
+    session.user = user;
 }

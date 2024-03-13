@@ -1,14 +1,27 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers } from '../model/users';
+import { type User, getUsers, editUser } from '../model/users';
 import { ref } from 'vue';
 const users = ref([] as User[]);
 users.value = getUsers();
 
+const editedUser = ref({} as User);
+
 const modal = ref(false);
-function toggleModal() {
+function toggleModal(user: User | null = null) {
+    console.log(user)
+    if(user) {
+        if(modal.value) {
+            editUser(user);
+        }
+        else {
+            editedUser.value = { ...user };
+        }
+    }
     modal.value = !modal.value;
     console.log({ modal: modal.value });
+
+
 }
 
 function deleteUser(index: number) {
@@ -33,7 +46,7 @@ function deleteUser(index: number) {
                     <p class="subtitle is-6">UserID: {{ user.id }}</p>
                 </div>
                 <div class="button-container">
-                    <button @click="toggleModal" class="button is-warning is-focused">Edit</button>
+                    <button @click="toggleModal(user)" class="button is-warning is-focused">Edit</button>
                     <button @click="deleteUser(index)" class="button is-danger is-focused">Delete</button>
                 </div>
             </div>
@@ -43,26 +56,27 @@ function deleteUser(index: number) {
         <div class="modal-background"></div>
         <div class="modal-content">
             <div class="box">
+                {{ editedUser.firstName }}
                 <h1 class="title">Edit User</h1>
                 <div class="field">
                     <label class="label">First Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="First Name">
+                        <input class="input" type="text" placeholder="First Name" v-model="editedUser.firstName">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Last Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Last Name">
+                        <input class="input" type="text" placeholder="Last Name" v-model="editedUser.lastName">
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="toggleModal" class="button is-primary">Save Changes</button>
+                        <button @click="toggleModal(editedUser)" class="button is-primary">Save Changes</button>
                     </div>
                 </div>
             </div>
         </div>
-        <button @click="toggleModal" class="modal-close is-large" aria-label="close"></button>
+        <button @click="toggleModal()" class="modal-close is-large" aria-label="close"></button>
     </div>
 </template>
