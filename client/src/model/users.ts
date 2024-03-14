@@ -27,3 +27,9 @@ export function editUser(user: User) {
   const index = data.users.findIndex(u => u.id === user.id);
   data.users[index] = user;
 }
+
+export function addActivity(user : User | null, activity : Activity)
+{
+  const index = data.users.findIndex(u => u.id === user?.id);
+  data.users[index].activities.push({...activity});
+}

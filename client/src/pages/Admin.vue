@@ -20,8 +20,6 @@ function toggleModal(user: User | null = null) {
     }
     modal.value = !modal.value;
     console.log({ modal: modal.value });
-
-
 }
 
 function deleteUser(index: number) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers } from '../model/users';
+import { type User, getUsers, addActivity, type Activity } from '../model/users';
 import { ref } from 'vue';
 import Login from '../components/Login.vue';
 import { getSession } from '@/model/session';
@@ -11,10 +11,14 @@ function toggleModal() {
     modal.value = !modal.value;
     console.log({ modal: modal.value });
 }
+
+const newActivity = ref({} as Activity);
+
+//addActivity(session.user, activity.value);
 </script>
 
 <template>
-  <button @click="toggleModal"class="button is-primary" style="display: block; margin: auto;">
+  <button @click="toggleModal()"class="button is-primary" style="display: block; margin: auto;">
     Add Activity
   </button>
   <div class="columns is-centered">
@@ -52,32 +56,32 @@ function toggleModal() {
             <div class="box">
                 <h1 class="title">Add Activity</h1>
                 <div class="field">
-                    <label class="label">date</label>
+                    <label class="label">Date</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Date">
+                        <input class="input" type="date" placeholder="Date" v-model="newActivity.date">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Calories Burned</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Calories Burned">
+                        <input class="input" type="number" placeholder="Calories Burned" v-model="newActivity.caloriesBurned">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Distance Ran</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Distance Ran">
+                        <input class="input" type="number" placeholder="Distance Ran" v-model="newActivity.distance">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Description</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Description">
+                        <input class="input" type="text" placeholder="Description" v-model="newActivity.description">
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="toggleModal" class="button is-primary">Sign Up</button>
+                        <button @click="addActivity(session.user, newActivity); toggleModal()" class="button is-primary">Create Activity</button>
                     </div>
                 </div>
             </div>
