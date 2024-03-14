@@ -12,16 +12,16 @@
                     "date": "2019-01-01",
                     "caloriesBurned": 200,
                     "distance": 2.5,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 },
                 {
                     "activityID": 2,
                     "date": "2019-01-02",
                     "caloriesBurned": 250,
                     "distance": 3.0,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 }
             ]
         },
@@ -37,16 +37,16 @@
                     "date": "2019-01-01",
                     "caloriesBurned": 220,
                     "distance": 2.7,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 },
                 {
                     "activityID": 4,
                     "date": "2019-01-02",
                     "caloriesBurned": 240,
                     "distance": 2.9,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 }
             ]
         },
@@ -62,16 +62,16 @@
                     "date": "2019-01-01",
                     "caloriesBurned": 180,
                     "distance": 2.2,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 },
                 {
                     "activityID": 6,
                     "date": "2019-01-02",
                     "caloriesBurned": 200,
                     "distance": 2.5,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 }
             ]
         },
@@ -87,16 +87,16 @@
                     "date": "2019-01-01",
                     "caloriesBurned": 250,
                     "distance": 3.0,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 },
                 {
                     "activityID": 8,
                     "date": "2019-01-02",
                     "caloriesBurned": 270,
                     "distance": 3.3,
-                    "activityImage": "https://example.com/activity1.jpg",
-                    "activityDescription": "Morning Jog in the Park"
+                    "image": "https://example.com/activity1.jpg",
+                    "description": "Morning Jog in the Park"
                 }
             ]
         }

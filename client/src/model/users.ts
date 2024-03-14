@@ -14,8 +14,8 @@ export interface Activity {
   date: string
   caloriesBurned: number
   distance: number
-  activityImage: string
-  activityDescription: string
+  image: string
+  description: string
 }
 
 

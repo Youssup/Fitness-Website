@@ -51,7 +51,7 @@ const users = getUsers()
                 </div>
             </div>
         </div>
-        <a v-if="session.user != null" class="navbar-item">
+        <a v-if="session.user" class="navbar-item">
             <strong>{{ session.user.firstName + " " + session.user.lastName }}</strong>
         </a>
         <img v-if="session.user != null" :src="session.user.profileImage" class="profile-image" />
