@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 import { type User, getUsers } from '../model/users';
 import Login from './Login.vue';
-import { getSession } from '@/model/session';
+import { getSession } from '@/viewModel/session';
 
 let isActive = ref(false);
 function toggleMenu() {
@@ -69,4 +69,4 @@ function setCurrentUser(user: User | null) {
 .navbar {
   height: 25px;
 }
-</style>
+</style>@/viewModel/session

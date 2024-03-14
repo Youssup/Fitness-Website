@@ -5,21 +5,21 @@ import { ref } from 'vue';
 const users = ref([] as User[]);
 users.value = getUsers();
 
-const editedUser = ref({} as User);
+const editedUser = ref(null as User | null);
 
-const modal = ref(false);
-function toggleModal(user: User | null = null) {
-    console.log(user)
-    if(user) {
-        if(modal.value) {
-            editUser(user);
-        }
-        else {
-            editedUser.value = { ...user };
-        }
+function startEditing(user: User) {
+    editedUser.value = { ...user };
+}
+
+function saveChanges() {
+    if(editedUser.value){
+        editUser(editedUser.value);
+        closeModal();
     }
-    modal.value = !modal.value;
-    console.log({ modal: modal.value });
+}
+
+function closeModal() {
+    editedUser.value = null
 }
 
 function deleteUser(index: number) {
@@ -44,13 +44,13 @@ function deleteUser(index: number) {
                     <p class="subtitle is-6">UserID: {{ user.id }}</p>
                 </div>
                 <div class="button-container">
-                    <button @click="toggleModal(user)" class="button is-warning is-focused">Edit</button>
+                    <button @click="startEditing(user)" class="button is-warning is-focused">Edit</button>
                     <button @click="deleteUser(index)" class="button is-danger is-focused">Delete</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal" :class="{ 'is-active': modal }">
+    <div class="modal" :class="{ 'is-active': editedUser }" v-if="editedUser">
         <div class="modal-background"></div>
         <div class="modal-content">
             <div class="box">
@@ -70,11 +70,11 @@ function deleteUser(index: number) {
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="toggleModal(editedUser)" class="button is-primary">Save Changes</button>
+                        <button @click="saveChanges()" class="button is-primary">Save Changes</button>
                     </div>
                 </div>
             </div>
         </div>
-        <button @click="toggleModal()" class="modal-close is-large" aria-label="close"></button>
+        <button @click="closeModal()" class="modal-close is-large" aria-label="close"></button>
     </div>
 </template>

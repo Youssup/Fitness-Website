@@ -3,6 +3,7 @@ import HomeView from '../pages/HomeView.vue'
 import Admin from '../pages/Admin.vue'
 import Activities from '../pages/Activities.vue'
 import Friends from '../pages/Friends.vue'
+import { getSession } from '@/viewModel/session'
 
 
 
@@ -30,6 +31,17 @@ const router = createRouter({
       component: Friends
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const session = getSession();
+  if(['/login'].includes(to.path) && !session.user){
+  console.log('beforeEach', to, from);
+  next('/login');
+  }
+  else{
+    next();
+  }
 })
 
 export default router

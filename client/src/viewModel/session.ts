@@ -1,4 +1,4 @@
-import { type User } from "./users";
+import { type User } from "../model/users";
 import { reactive } from "vue";
 
 

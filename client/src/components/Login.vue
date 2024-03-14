@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type User, getUsers} from "../model/users";
-import { getSession, login } from '../model/session'
+import { getSession, login } from '../viewModel/session'
 import { ref } from "vue";
 let isActiveLogin = ref(false);
 function toggleMenuLogin() {
@@ -88,4 +88,4 @@ const users = getUsers()
 </template>
 
 <style scoped>
-</style>
+</style>../viewModel/session

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers, addActivity, type Activity } from '../model/users';
+import { type User, getUsers, addActivity, type Activity, deleteActivity } from '../model/users';
 import { ref } from 'vue';
 import Login from '../components/Login.vue';
-import { getSession } from '@/model/session';
+import { getSession } from '@/viewModel/session';
 const session = getSession();
 
 const modal = ref(false);
@@ -13,8 +13,6 @@ function toggleModal() {
 }
 
 const newActivity = ref({} as Activity);
-
-//addActivity(session.user, activity.value);
 </script>
 
 <template>
@@ -46,6 +44,8 @@ const newActivity = ref({} as Activity);
             <p><strong>Description:</strong> {{ activity.description }} </p>
             <img :src="activity.image" alt="Activity image">
           </div>
+            <button @click="toggleModal()" class="button is-warning is-focused" style="margin-right: 20px;">Edit</button>
+            <button @click="deleteActivity(session.user, activity)" class="button is-danger is-focused">Delete</button>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ const newActivity = ref({} as Activity);
                 <div class="field">
                     <label class="label">Distance Ran</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Distance Ran" v-model="newActivity.distance">
+                        <input class="input" type="number" min="1" max="999" placeholder="Distance Ran" v-model="newActivity.distance">
                     </div>
                 </div>
                 <div class="field">
@@ -96,4 +96,4 @@ const newActivity = ref({} as Activity);
     </div>
 </template>
 
-<style scoped></style>
+<style scoped></style>@/viewModel/session
