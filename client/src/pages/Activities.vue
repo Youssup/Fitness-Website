@@ -80,6 +80,12 @@ const newActivity = ref({} as Activity);
                     </div>
                 </div>
                 <div class="field">
+                    <label class="label">Image</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Image url" v-model="newActivity.image">
+                    </div>
+                </div>
+                <div class="field">
                     <div class="control">
                         <button @click="addActivity(session.user, newActivity); toggleModal()" class="button is-primary">Create Activity</button>
                     </div>
