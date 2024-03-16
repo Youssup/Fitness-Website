@@ -34,12 +34,15 @@ export function addActivity(user : User | null, activity : Activity)
   data.users[index].activities.push({...activity});
 }
 
+/*
 export function deleteActivity(user : User | null, activity : Activity)
 {
   const index = data.users.findIndex(u => u.id === user?.id);
   const activityIndex = data.users[index].activities.findIndex(a => a.activityID === activity.activityID);
   data.users[index].activities.splice(activityIndex, 1);
 }
+Doesn't work because the user doesn't get updated when the activity is deleted I'm guessing not really sure why.
+*/
 
 export function editActivity(user : User | null, activity : Activity)
 {
