@@ -54,7 +54,6 @@ function deleteUser(index: number) {
         <div class="modal-background"></div>
         <div class="modal-content">
             <div class="box">
-                {{ editedUser.firstName }}
                 <h1 class="title">Edit User</h1>
                 <div class="field">
                     <label class="label">First Name</label>
