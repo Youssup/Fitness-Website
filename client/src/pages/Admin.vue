@@ -12,7 +12,7 @@ function startEditing(user: User) {
 }
 
 function saveChanges() {
-    if(editedUser.value){
+    if (editedUser.value) {
         editUser(editedUser.value);
         closeModal();
     }
@@ -28,9 +28,12 @@ function deleteUser(index: number) {
 </script>
 
 <template>
-    <div>
-        <h1>Admin</h1>
+    <div class="container">
+        <p class="title is-1" style="display: block; margin: auto;">Admin Page</p>
     </div>
+    <button @click="" class="button is-primary" style="display: block; margin: auto;">
+        Add Activity
+    </button>
     <div v-for="(user, index) in users" :key="user.id" class="card">
         <div class="card-content">
             <div class="media">

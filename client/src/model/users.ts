@@ -50,3 +50,8 @@ export function editActivity(user : User | null, activity : Activity)
   const activityIndex = data.users[index].activities.findIndex(a => a.activityID === activity.activityID);
   data.users[index].activities[activityIndex] = activity;
 }
+
+export function createUser(user: User) {
+  user.id = data.users.length + 1;
+  data.users.push(user);
+}
