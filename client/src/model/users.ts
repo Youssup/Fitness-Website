@@ -55,3 +55,9 @@ export function createUser(user: User) {
   user.id = data.users.length + 1;
   data.users.push(user);
 }
+
+export function checkUserProfileImage(user: User){
+  if(user.profileImage==null) {
+      user.profileImage = "https://robohash.org/bob.png?set=set4";
+  }
+}

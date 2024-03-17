@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers, editUser, createUser } from '../model/users';
+import { type User, getUsers, editUser, createUser, checkUserProfileImage } from '../model/users';
 import { ref } from 'vue';
 const users = ref([] as User[]);
 users.value = getUsers();
@@ -38,11 +38,13 @@ function closeAddUserModal() {
     console.log('addUserModal closed');
 }
 
-function checkUserProfileImage(user: User){
-    if(user.profileImage==null) {
-        user.profileImage = "https://robohash.org/bob.png?set=set4";
-    }
+function createNewUser(user: User) {
+    createUser(user);
+    checkUserProfileImage(user);
+    newUser.value= ({} as User);
+    closeAddUserModal();
 }
+
 </script>
 
 <template>
@@ -122,7 +124,7 @@ function checkUserProfileImage(user: User){
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="closeAddUserModal(); createUser(newUser); checkUserProfileImage(newUser)" class="button is-primary">Add User</button>
+                        <button @click="closeAddUserModal(); createNewUser(newUser)" class="button is-primary">Add User</button>
                     </div>
                 </div>
             </div>
