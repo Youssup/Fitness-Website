@@ -72,3 +72,7 @@ export function checkUserProfileImage(user: User){
       user.profileImage = "https://robohash.org/bob.png?set=set4";
   }
 }
+
+export function getUserByID(id: number) {
+  return data.users.find(u => u.id === id);
+}

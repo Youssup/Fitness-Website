@@ -1,54 +1,52 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers } from '../model/users';
+import { type User, getUsers, getUserByID } from '../model/users';
 import { ref } from 'vue';
-const users = ref([] as User[]);
-users.value = getUsers();
+import { getSession } from '@/viewModel/session';
 
 const modal = ref(false);
 function toggleModal() {
   modal.value = !modal.value;
   console.log({ modal: modal.value });
 }
-
+const users = getUsers();
+const session = getSession();
 </script>
 
 <template>
   <div class="container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
-        <p class="title is-1">Friends Activities Page</p>
-    </div>
+    <p class="title is-1">Activities Page</p>
+  </div>
   <div class="columns is-centered">
     <div class="column is-half">
-      <div v-for="user in users" class="card">
-        <header class="card-header" style="display: flex; align-items: center; justify-content: space-between;">
-          <p class="card-header-title">
-            <img :src="user.profileImage" alt="Placeholder image" class="image is-16x16">
-            Statistics for {{ user.firstName + " " + user.lastName }}
-          </p>
-          <a @click="toggleModal" class="button is-primary">
-            <strong>View Activities</strong>
-          </a>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <div v-for="activity in user.activities">
-              <p><strong>Calories Burned:</strong> {{ user.caloriesBurned }}</p>
+      <div v-for="id in session.user?.friends" :key="id">
+        <div v-for="activity in getUserByID(id)?.activities" :key="activity.activityID">
+            <div class="card-image">
+              <figure class="image is-3by2">
+                <img :src=activity.image alt="Activity image">
+              </figure>
             </div>
-            <p><strong>Distance:</strong> {{ user.distance }}</p>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img :src="getUserByID(id)?.profileImage" alt="Profile image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">{{ getUserByID(id)?.firstName }} {{ getUserByID(id)?.lastName }}</p>
+                </div>
+              </div>
+
+              <div class="content">
+                {{ activity.description }}
+                <time datetime="2016-1-1">{{ activity.date }}</time>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal" :class="{ 'is-active': modal }">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="box">
-        <h1 class="title">Statistics</h1>
-      </div>
-    </div>
-    <button @click="toggleModal" class="modal-close is-large" aria-label="close"></button>
-  </div>
 </template>
 
 <style scoped></style>
