@@ -43,6 +43,9 @@ function errorMessage(activity: Activity) {
 </script>
 
 <template>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+        <p class="title is-1">Activities Page</p>
+    </div>
     <button @click="openAddModal()" class="button is-primary" style="display: block; margin: auto;">
         Add Activity
     </button>

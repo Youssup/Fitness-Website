@@ -14,6 +14,9 @@ function toggleModal() {
 </script>
 
 <template>
+  <div class="container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+        <p class="title is-1">Friends Activities Page</p>
+    </div>
   <div class="columns is-centered">
     <div class="column is-half">
       <div v-for="user in users" class="card">
