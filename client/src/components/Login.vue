@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type User, getUsers} from "../model/users";
+import { type User, getUsers, createUser, checkUserProfileImage } from "../model/users";
 import { getSession, login } from '../viewModel/session'
 import { ref } from "vue";
 let isActiveLogin = ref(false);
@@ -18,7 +18,13 @@ const session = getSession()
 
 const users = getUsers()
 
-
+const newUser = ref({} as User);
+function createNewUser(user: User) {
+    createUser(user);
+    checkUserProfileImage(user);
+    newUser.value = ({} as User);
+    toggleModal();
+}
 </script>
 
 <template>
@@ -67,18 +73,24 @@ const users = getUsers()
                 <div class="field">
                     <label class="label">First Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="First Name">
+                        <input class="input" type="text" placeholder="First Name" v-model="newUser.firstName">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Last Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Last Name">
+                        <input class="input" type="text" placeholder="Last Name" v-model="newUser.lastName">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Profile Image</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Profile Image" v-model="newUser.profileImage">
                     </div>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="toggleModal" class="button is-primary">Sign Up</button>
+                        <button @click="createNewUser(newUser)" class="button is-primary">Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -87,5 +99,4 @@ const users = getUsers()
     </div>
 </template>
 
-<style scoped>
-</style>../viewModel/session
+<style scoped></style>

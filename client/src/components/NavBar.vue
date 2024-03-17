@@ -69,4 +69,4 @@ function setCurrentUser(user: User | null) {
 .navbar {
   height: 25px;
 }
-</style>@/viewModel/session
+</style>

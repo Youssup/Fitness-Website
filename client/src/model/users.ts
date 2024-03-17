@@ -53,5 +53,22 @@ export function editActivity(user : User | null, activity : Activity)
 
 export function createUser(user: User) {
   user.id = data.users.length + 1;
+  user.activities = [];
+  user.friends = [];
+  user.admin = false;
+  if(user.firstName == null)
+  {
+    user.firstName = "Anonymous";
+  }
+  if(user.lastName == null)
+  {
+    user.lastName = "Anonymous";
+  }
   data.users.push(user);
+}
+
+export function checkUserProfileImage(user: User){
+  if(user.profileImage==null) {
+      user.profileImage = "https://robohash.org/bob.png?set=set4";
+  }
 }
