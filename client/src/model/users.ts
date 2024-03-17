@@ -7,6 +7,7 @@ export interface User {
   admin: boolean
   profileImage: string
   activities: Activity[]
+  friends: number[]
 }
 
 export interface Activity {
@@ -17,7 +18,6 @@ export interface Activity {
   image: string
   description: string
 }
-
 
   export function getUsers(): User[] {
     return data.users;
