@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IndexKind } from 'typescript';
-import { type User, getUsers, editUser } from '../model/users';
+import { type User, getUsers, editUser, createUser } from '../model/users';
 import { ref } from 'vue';
 const users = ref([] as User[]);
 users.value = getUsers();
@@ -12,7 +12,7 @@ function startEditing(user: User) {
 }
 
 function saveChanges() {
-    if(editedUser.value){
+    if (editedUser.value) {
         editUser(editedUser.value);
         closeModal();
     }
@@ -25,12 +25,33 @@ function closeModal() {
 function deleteUser(index: number) {
     users.value.splice(index, 1);
 }
+
+const newUser = ref({} as User);
+const addUserModal = ref(false);
+function openAddUserModal() {
+    addUserModal.value = true;
+    console.log('addUserModal opened');
+}
+
+function closeAddUserModal() {
+    addUserModal.value = false;
+    console.log('addUserModal closed');
+}
+
+function checkUserProfileImage(user: User){
+    if(user.profileImage==null) {
+        user.profileImage = "https://robohash.org/bob.png?set=set4";
+    }
+}
 </script>
 
 <template>
-    <div>
-        <h1>Admin</h1>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+        <p class="title is-1">Admin Page</p>
     </div>
+    <button @click="openAddUserModal()" class="button is-primary" style="display: block; margin: auto;">
+        Add User
+    </button>
     <div v-for="(user, index) in users" :key="user.id" class="card">
         <div class="card-content">
             <div class="media">
@@ -75,5 +96,37 @@ function deleteUser(index: number) {
             </div>
         </div>
         <button @click="closeModal()" class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <div class="modal" :class="{ 'is-active': addUserModal }">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <h1 class="title">Add User</h1>
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="First Name" v-model="newUser.firstName">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Last Name" v-model="newUser.lastName">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Profile Image</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Profile Image" v-model="newUser.profileImage">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button @click="closeAddUserModal(); createUser(newUser); checkUserProfileImage(newUser)" class="button is-primary">Add User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button @click="closeAddUserModal()" class="modal-close is-large" aria-label="close"></button>
     </div>
 </template>

@@ -17,8 +17,8 @@ function closeAddModal() {
 }
 const editModal = ref(false);
 const editedActivity = ref({} as Activity);
-function openEditModal(activity : Activity) {
-    editedActivity.value = {...activity};
+function openEditModal(activity: Activity) {
+    editedActivity.value = { ...activity };
     editModal.value = true;
     console.log({ modal: editModal.value });
 }
@@ -29,49 +29,63 @@ function closeEditModal() {
 
 const newActivity = ref({} as Activity);
 
-function deleteActivity(user : User | null, activitiy : Activity) {
-    if (user !=null) {
-    user.activities.splice(user.activities.indexOf(activitiy), 1);
+function deleteActivity(user: User | null, activitiy: Activity) {
+    if (user != null) {
+        user.activities.splice(user.activities.indexOf(activitiy), 1);
+    }
+}
+
+function errorMessage(activity: Activity) {
+    if(activity.caloriesBurned == null || activity.distance == null) {
+        alert("Not filling out the calories burned or distance fields will result in an error. Edit the activity and fill out the calories burned and distance fields to fix the errors");
     }
 }
 </script>
 
 <template>
-  <button @click="openAddModal()"class="button is-primary" style="display: block; margin: auto;">
-    Add Activity
-  </button>
-  <div class="columns is-centered">
-    <div class="column is-half">
-      <div class="card" style="margin-top: 20px;">
-        <header class="card-header">
-          <p class="card-header-title">
-            <img :src="session.user?.profileImage" alt="Placeholder image" class="image is-16x16">
-            Statistics for {{ session.user?.firstName + " " + session.user?.lastName }}
-          </p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            <p><strong>Calories Burned:</strong> {{ session.user?.activities.reduce((total, activity) => total + activity.caloriesBurned, 0) }}</p>
-            <p><strong>Distance:</strong> {{ session.user?.activities.reduce((total, activity) => total + activity.distance, 0) }}</p>
-          </div>
-        </div>
-      </div>
-      <div v-for="activity in session.user?.activities" :key="activity.activityID" class="card" style="margin-top: 20px;">
-        <div class="card-content">
-          <div class="content">
-            <p><strong>Date:</strong> {{ activity.date }}</p>
-            <p><strong>Calories Burned:</strong> {{ activity.caloriesBurned }}</p>
-            <p><strong>Distance:</strong> {{ activity.distance }}</p>
-            <p><strong>Description:</strong> {{ activity.description }} </p>
-            <img :src="activity.image" alt="Activity image">
-          </div>
-            <button @click="openEditModal(activity)" class="button is-warning is-focused" style="margin-right: 20px;">Edit</button>
-            <button @click="deleteActivity(session.user, activity)" class="button is-danger is-focused">Delete</button>
-        </div>
-      </div>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+        <p class="title is-1">Activities Page</p>
     </div>
-  </div>
-  <div class="modal" :class="{ 'is-active': addModal }">
+    <button @click="openAddModal()" class="button is-primary" style="display: block; margin: auto;">
+        Add Activity
+    </button>
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <div class="card" style="margin-top: 20px;">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        <img :src="session.user?.profileImage" alt="Placeholder image" class="image is-16x16">
+                        Statistics for {{ session.user?.firstName + " " + session.user?.lastName }}
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <p><strong>Calories Burned:</strong> {{ session.user?.activities.reduce((total, activity) =>
+        total + activity.caloriesBurned, 0) }}</p>
+                        <p><strong>Distance:</strong> {{ session.user?.activities.reduce((total, activity) => total +
+        activity.distance, 0) }}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-for="activity in session.user?.activities" :key="activity.activityID" class="card"
+                style="margin-top: 20px;">
+                <div class="card-content">
+                    <div class="content">
+                        <p><strong>Date:</strong> {{ activity.date }}</p>
+                        <p><strong>Calories Burned:</strong> {{ activity.caloriesBurned }}</p>
+                        <p><strong>Distance:</strong> {{ activity.distance }}</p>
+                        <p><strong>Description:</strong> {{ activity.description }} </p>
+                        <img :src="activity.image" alt="Activity image">
+                    </div>
+                    <button @click="openEditModal(activity)" class="button is-warning is-focused"
+                        style="margin-right: 20px;">Edit</button>
+                    <button @click="deleteActivity(session.user, activity)"
+                        class="button is-danger is-focused">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" :class="{ 'is-active': addModal }">
         <div class="modal-background"></div>
         <div class="modal-content">
             <div class="box">
@@ -85,13 +99,15 @@ function deleteActivity(user : User | null, activitiy : Activity) {
                 <div class="field">
                     <label class="label">Calories Burned</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Calories Burned" v-model="newActivity.caloriesBurned">
+                        <input class="input" type="number" placeholder="Calories Burned"
+                            v-model="newActivity.caloriesBurned">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Distance Ran</label>
                     <div class="control">
-                        <input class="input" type="number" min="1" max="999" placeholder="Distance Ran" v-model="newActivity.distance">
+                        <input class="input" type="number" min="1" max="999" placeholder="Distance Ran"
+                            v-model="newActivity.distance">
                     </div>
                 </div>
                 <div class="field">
@@ -108,7 +124,9 @@ function deleteActivity(user : User | null, activitiy : Activity) {
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="addActivity(session.user, newActivity); closeAddModal()" class="button is-primary">Create Activity</button>
+                        <button @click="addActivity(session.user, newActivity); closeAddModal(); errorMessage(newActivity)"
+                            class="button is-primary">Create Activity
+                        </button>
                     </div>
                 </div>
             </div>
@@ -129,13 +147,15 @@ function deleteActivity(user : User | null, activitiy : Activity) {
                 <div class="field">
                     <label class="label">Calories Burned</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Calories Burned" v-model="editedActivity.caloriesBurned">
+                        <input class="input" type="number" placeholder="Calories Burned"
+                            v-model="editedActivity.caloriesBurned">
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Distance Ran</label>
                     <div class="control">
-                        <input class="input" type="number" min="1" max="999" placeholder="Distance Ran" v-model="editedActivity.distance">
+                        <input class="input" type="number" min="1" max="999" placeholder="Distance Ran"
+                            v-model="editedActivity.distance">
                     </div>
                 </div>
                 <div class="field">
@@ -152,7 +172,8 @@ function deleteActivity(user : User | null, activitiy : Activity) {
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="editActivity(session.user, editedActivity); closeEditModal();" class="button is-primary">Edit Activity</button>
+                        <button @click="editActivity(session.user, editedActivity); closeEditModal(); errorMessage(editedActivity)"
+                            class="button is-primary">Edit Activity</button>
                     </div>
                 </div>
             </div>

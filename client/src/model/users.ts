@@ -7,6 +7,7 @@ export interface User {
   admin: boolean
   profileImage: string
   activities: Activity[]
+  friends: number[]
 }
 
 export interface Activity {
@@ -17,7 +18,6 @@ export interface Activity {
   image: string
   description: string
 }
-
 
   export function getUsers(): User[] {
     return data.users;
@@ -49,4 +49,9 @@ export function editActivity(user : User | null, activity : Activity)
   const index = data.users.findIndex(u => u.id === user?.id);
   const activityIndex = data.users[index].activities.findIndex(a => a.activityID === activity.activityID);
   data.users[index].activities[activityIndex] = activity;
+}
+
+export function createUser(user: User) {
+  user.id = data.users.length + 1;
+  data.users.push(user);
 }
