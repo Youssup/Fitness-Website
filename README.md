@@ -1,2 +1,1 @@
-# WebServerProgrammingHome
-Web Server Programming Project
+# Fitness Tracker
