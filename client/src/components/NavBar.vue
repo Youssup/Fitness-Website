@@ -12,7 +12,7 @@ function toggleMenu() {
 }
 
 const users = ref([] as User[]);
-users.value = getUsers();
+users.value = await getUsers();
 
 const session = getSession();
 function setCurrentUser(user: User | null) {

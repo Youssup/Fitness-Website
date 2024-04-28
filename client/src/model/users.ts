@@ -1,4 +1,5 @@
-import data from "../data/users.json";
+import data from "../data/users.json"
+import { rest } from "./myFetch"
 
 export interface User {
   id: number
@@ -19,19 +20,19 @@ export interface Activity {
   description: string
 }
 
-  export function getUsers(): User[] {
-    return data.users;
+export async function getUsers(): Promise<User[]> {
+  const response = await rest("http://localhost:3000/users")
+  return users
 }
 
-export function editUser(user: User) {
+export async function editUser(user: User) {
   const index = data.users.findIndex(u => u.id === user.id);
   data.users[index] = user;
 }
 
-export function addActivity(user : User | null, activity : Activity)
-{
+export function addActivity(user: User | null, activity: Activity) {
   const index = data.users.findIndex(u => u.id === user?.id);
-  data.users[index].activities.push({...activity});
+  data.users[index].activities.push({ ...activity });
 }
 
 /*
@@ -44,8 +45,7 @@ export function deleteActivity(user : User | null, activity : Activity)
 Doesn't work because the user doesn't get updated when the activity is deleted I'm guessing not really sure why.
 */
 
-export function editActivity(user : User | null, activity : Activity)
-{
+export function editActivity(user: User | null, activity: Activity) {
   const index = data.users.findIndex(u => u.id === user?.id);
   const activityIndex = data.users[index].activities.findIndex(a => a.activityID === activity.activityID);
   data.users[index].activities[activityIndex] = activity;
@@ -56,20 +56,18 @@ export function createUser(user: User) {
   user.activities = [];
   user.friends = [];
   user.admin = false;
-  if(user.firstName == null)
-  {
+  if (user.firstName == null) {
     user.firstName = "Anonymous";
   }
-  if(user.lastName == null)
-  {
+  if (user.lastName == null) {
     user.lastName = "Anonymous";
   }
   data.users.push(user);
 }
 
-export function checkUserProfileImage(user: User){
-  if(user.profileImage==null) {
-      user.profileImage = "https://robohash.org/bob.png?set=set4";
+export function checkUserProfileImage(user: User) {
+  if (user.profileImage == null) {
+    user.profileImage = "https://robohash.org/bob.png?set=set4";
   }
 }
 

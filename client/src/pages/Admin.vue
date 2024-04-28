@@ -3,7 +3,7 @@ import { IndexKind } from 'typescript';
 import { type User, getUsers, editUser, createUser, checkUserProfileImage } from '../model/users';
 import { ref } from 'vue';
 const users = ref([] as User[]);
-users.value = getUsers();
+users.value = await getUsers();
 
 const editedUser = ref(null as User | null);
 

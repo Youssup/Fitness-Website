@@ -16,7 +16,7 @@ function toggleModal() {
 
 const session = getSession()
 
-const users = getUsers()
+const users = await getUsers()
 
 const newUser = ref({} as User);
 function createNewUser(user: User) {
