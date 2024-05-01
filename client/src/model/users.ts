@@ -21,7 +21,7 @@ export interface Activity {
 }
 
 export async function getUsers(): Promise<User[]> {
-  const response = await rest("http://localhost:3000/users")
+  const users = await rest("http://localhost:3000/users/")
   return users
 }
 

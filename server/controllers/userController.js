@@ -2,8 +2,8 @@ const users = require("../models/userModel");
 
 exports.getUsers = async (req, res) => {
     try {
-        const users = await users.getUsers()
-        res.send(users)
+        const response = await users.getUsers()
+        res.send(response)
     }
     catch (error) {
         res.status(401).send("could not get users")
