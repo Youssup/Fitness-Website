@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { IndexKind } from 'typescript';
 import { type User, getUsers, editUser, createUser, checkUserProfileImage } from '../model/users';
 import { ref } from 'vue';
 const users = ref([] as User[]);
