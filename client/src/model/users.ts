@@ -30,10 +30,18 @@ export async function editUser(user: User) {
   data.users[index] = user;
 }
 
-export function addActivity(user: User | null, activity: Activity) {
-  const index = data.users.findIndex(u => u.id === user?.id);
-  data.users[index].activities.push({ ...activity });
+export async function addActivity(user: User | null, activity: Activity) {
+  try {
+    const userID = user?.id;
+    const response = await rest("http://localhost:3000/users/addActivity", { userID, activity }, "POST");
+    console.log(response);
+  } catch (error) {
+    console.error('Error adding activity:', error);
+    throw error;
+  }
 }
+  // const index = data.users.findIndex(u => u.id === user?.id);
+  // data.users[index].activities.push({ ...activity });
 
 /*
 export function deleteActivity(user : User | null, activity : Activity)

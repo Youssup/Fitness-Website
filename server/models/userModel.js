@@ -23,16 +23,14 @@ async function save(data) {
 
 async function getUsers() {
     const data = await getData();
-    return data.users.map(x => ({
-        ...x, password: undefined
-    }))
+    return data.users
 }
 
 async function getUserById(id) {
     const data = await getData();
     return data.users.find(user => user.id === id);
 }
-
+//might need later
 async function searchUsers(keyword) {
     const data = await getData();
     return data.filter(user => user.firstName.toLowerCase().includes(keyword.toLowerCase()));
@@ -47,6 +45,7 @@ async function addActivity(userID, activity) {
     const data = await getData();
     const user = data.users.find(user => user.id === userID);
     user.activities.push(activity);
+    await save(data);
 }
 
 async function editActivity(userID, activityID, activity) {

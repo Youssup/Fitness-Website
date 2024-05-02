@@ -34,7 +34,8 @@ exports.addActivity = async (req, res) => {
     try {
         const userID = req.body.id
         const activity = req.body.activity
-        res.send(await users.addActivity(userID, activity))
+        const result = await users.addActivity(userID, activity)
+        res.send(result)
     }
     catch (error) {
         res.status(401).send("could not add activity")
