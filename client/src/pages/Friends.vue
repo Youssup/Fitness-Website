@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { IndexKind } from 'typescript';
-import { type User, getUsers, getUserByID } from '../model/users';
+import { getUsers, getUserByID } from '../model/users';
 import { ref } from 'vue';
 import { getSession } from '@/viewModel/session';
 

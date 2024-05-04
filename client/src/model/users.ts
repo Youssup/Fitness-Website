@@ -1,4 +1,3 @@
-import data from "../data/users.json"
 import { rest } from "./myFetch"
 
 export interface User {
@@ -103,6 +102,6 @@ export async function createUser(user: User) {
 // }
 
 export async function getUserByID(id: number) {
-  const response = await rest("/users/getUserByID", { id })
+  const response = await rest("/users/getUserByID", { id }, "GET")
   return response
 }
