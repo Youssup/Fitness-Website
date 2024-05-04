@@ -46,6 +46,7 @@ async function addActivity(userID, activity) {
     const user = data.users.find(user => user.id === userID);
     user.activities.push(activity);
     await save(data);
+    return activity;
 }
 
 async function editActivity(userID, activityID, activity) {

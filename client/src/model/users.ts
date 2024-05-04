@@ -21,7 +21,7 @@ export interface Activity {
 }
 
 export async function getUsers(): Promise<User[]> {
-  const users = await rest("http://localhost:3000/users/")
+  const users = await rest("/users/")
   return users
 }
 
@@ -31,14 +31,11 @@ export async function editUser(user: User) {
 }
 
 export async function addActivity(user: User | null, activity: Activity) {
-  try {
-    const userID = user?.id;
-    const response = await rest("http://localhost:3000/users/addActivity", { userID, activity }, "POST");
-    console.log(response);
-  } catch (error) {
-    console.error('Error adding activity:', error);
-    throw error;
-  }
+
+  const userID = user?.id
+  const response = await rest("/users/addActivity", { userID, activity }, "POST")
+  console.log(response.json())
+  return response
 }
   // const index = data.users.findIndex(u => u.id === user?.id);
   // data.users[index].activities.push({ ...activity });

@@ -32,14 +32,22 @@ exports.editUser = async (req, res) => {
 
 exports.addActivity = async (req, res) => {
     try {
-        const userID = req.body.id
-        const activity = req.body.activity
+
+        const activity = {
+            ...req.body.activity
+        }
+        console.log({activity})
+        const userID = req.body.userID
+        //const activity = req.body.activity
         const result = await users.addActivity(userID, activity)
+        console.log({result})
         res.send(result)
     }
     catch (error) {
+        console.log(error);
         res.status(401).send("could not add activity")
     }
+
 }
 
 exports.editActivity = async (req, res) => {

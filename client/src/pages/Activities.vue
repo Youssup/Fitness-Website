@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { IndexKind } from 'typescript';
 import { type User, getUsers, addActivity, type Activity, editActivity } from '../model/users';
 import { ref } from 'vue';
-import Login from '../components/Login.vue';
 import { getSession } from '@/viewModel/session';
 const session = getSession();
 
