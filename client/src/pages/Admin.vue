@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { type User, getUsers, editUser, createUser, checkUserProfileImage } from '../model/users';
-import { ref } from 'vue';
+import { type User, getUsers, editUser, createUser, deleteUser } from '../model/users';
+import { onMounted, ref } from 'vue';
+
 const users = ref([] as User[]);
-users.value = await getUsers();
+onMounted(async () => {
+    users.value = await getUsers();
+});
 
 const editedUser = ref(null as User | null);
 
@@ -21,10 +24,6 @@ function closeModal() {
     editedUser.value = null
 }
 
-function deleteUser(index: number) {
-    users.value.splice(index, 1);
-}
-
 const newUser = ref({} as User);
 const addUserModal = ref(false);
 function openAddUserModal() {
@@ -38,10 +37,16 @@ function closeAddUserModal() {
 }
 
 function createNewUser(user: User) {
-    createUser(user);
-    checkUserProfileImage(user);
-    newUser.value= ({} as User);
+    const sendUser = ref({} as User);
+    if (user.profileImage == null) {
+        sendUser.value.profileImage = "https://robohash.org/bob.png?set=set4";
+    }
+    sendUser.value.firstName = user.firstName;
+    sendUser.value.lastName = user.lastName;
+    createUser(sendUser.value);
+    newUser.value = ({} as User);
     closeAddUserModal();
+    console.log('User created:'+user);
 }
 
 </script>
@@ -67,7 +72,7 @@ function createNewUser(user: User) {
                 </div>
                 <div class="button-container">
                     <button @click="startEditing(user)" class="button is-warning is-focused">Edit</button>
-                    <button @click="deleteUser(index)" class="button is-danger is-focused">Delete</button>
+                    <button @click="deleteUser(user)" class="button is-danger is-focused">Delete</button>
                 </div>
             </div>
         </div>
@@ -123,7 +128,8 @@ function createNewUser(user: User) {
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="closeAddUserModal(); createNewUser(newUser)" class="button is-primary">Add User</button>
+                        <button @click="closeAddUserModal(); createNewUser(newUser)" class="button is-primary">Add
+                            User</button>
                     </div>
                 </div>
             </div>

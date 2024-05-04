@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type User, getUsers, createUser, checkUserProfileImage } from "../model/users";
+import { type User, getUsers, createUser } from "../model/users";
 import { getSession, login } from '../viewModel/session'
 import { ref } from "vue";
 let isActiveLogin = ref(false);
@@ -19,12 +19,22 @@ const session = getSession()
 const users = await getUsers()
 
 const newUser = ref({} as User);
+
 function createNewUser(user: User) {
+    if (user.profileImage == null) {
+        user.profileImage = "https://robohash.org/bob.png?set=set4";
+    }
     createUser(user);
-    checkUserProfileImage(user);
     newUser.value = ({} as User);
     toggleModal();
 }
+
+// function createNewUser(user: User) {
+//     createUser(user);
+//     checkUserProfileImage(user);
+//     newUser.value = ({} as User);
+//     toggleModal();
+// }
 </script>
 
 <template>

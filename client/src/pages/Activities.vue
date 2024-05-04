@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type User, getUsers, addActivity, type Activity, editActivity } from '../model/users';
+import { type User, getUsers, addActivity, type Activity, editActivity, deleteActivity } from '../model/users';
 import { ref } from 'vue';
 import { getSession } from '@/viewModel/session';
 const session = getSession();
@@ -27,17 +27,19 @@ function closeEditModal() {
 
 const newActivity = ref({} as Activity);
 
-function deleteActivity(user: User | null, activitiy: Activity) {
-    if (user != null) {
-        user.activities.splice(user.activities.indexOf(activitiy), 1);
-    }
-}
+// function deleteActivity(user: User | null, activitiy: Activity) {
+//     if (user != null) {
+//         user.activities.splice(user.activities.indexOf(activitiy), 1);
+//     }
+// }
 
 function errorMessage(activity: Activity) {
     if(activity.caloriesBurned == null || activity.distance == null) {
         alert("Not filling out the calories burned or distance fields will result in an error. Edit the activity and fill out the calories burned and distance fields to fix the errors");
     }
 }
+
+
 </script>
 
 <template>
@@ -122,7 +124,7 @@ function errorMessage(activity: Activity) {
                 </div>
                 <div class="field">
                     <div class="control">
-                        <button @click="addActivity(session.user, newActivity); closeAddModal(); errorMessage(newActivity)"
+                        <button @click="addActivity(session.user, newActivity); closeAddModal(); errorMessage(newActivity);"
                             class="button is-primary">Create Activity
                         </button>
                     </div>

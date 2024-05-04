@@ -22,29 +22,35 @@ exports.searchUsers = async (req, res) => {
 
 exports.editUser = async (req, res) => {
     try {
-        const userID = req.body.id
-        res.send(await users.editUser(userID))
+        const user = req.body.user
+        res.send(await users.editUser(user))
     }
     catch (error) {
         res.status(401).send("could not edit user")
     }
 }
 
+exports.deleteUser  = async (req, res) => {
+    try {
+        const userID = req.body.id
+        res.send(await users.deleteUser(userID))
+    }
+    catch (error) {
+        res.status(401).send("could not delete user")
+    }
+}
+
 exports.addActivity = async (req, res) => {
     try {
-
         const activity = {
             ...req.body.activity
         }
-        console.log({activity})
         const userID = req.body.userID
         //const activity = req.body.activity
         const result = await users.addActivity(userID, activity)
-        console.log({result})
         res.send(result)
     }
     catch (error) {
-        console.log(error);
         res.status(401).send("could not add activity")
     }
 
@@ -52,13 +58,23 @@ exports.addActivity = async (req, res) => {
 
 exports.editActivity = async (req, res) => {
     try {
-        const userID = req.body.id
-        const activityID = req.body.activityID
+        const user = req.body.user
         const activity = req.body.activity
-        res.send(await users.editActivity(userID, activityID, activity))
+        res.send(await users.editActivity(user, activity))
     }
     catch (error) {
         res.status(401).send("could not edit activity")
+    }
+}
+
+exports.deleteActivity = async (req, res) => {
+    try {
+        const userID = req.body.userID
+        const activityID = req.body.activityID
+        res.send(await users.deleteActivity(userID, activityID))
+    }
+    catch (error) {
+        res.status(401).send("could not delete activity")
     }
 }
 
@@ -89,5 +105,15 @@ exports.login = async (req, res) => {
     }
     catch (error) {
         res.status(401).send(error.message)
+    }
+}
+
+exports.getUserById = async (req, res) => {
+    try {
+        const userID = req.body.id
+        res.send(await users.getUserById(userID))
+    }
+    catch (error) {
+        res.status(401).send("could not get user")
     }
 }

@@ -13,8 +13,13 @@ app
 
 .put("/editActivity", userController.editActivity)
 
+.delete("/deleteUser", userController.deleteUser)
+
+.delete("/deleteActivity", userController.deleteActivity)
+
 .post("/createUser", userController.createUser)
 
-.post("/login", userController.login)
+.get("/getUserByID", userController.getUserById)
+
 
 module.exports = app
