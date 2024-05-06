@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express")
 const path = require("path")
 const app = express()
@@ -22,5 +24,5 @@ app.use((req, res) => {
 });
 
 
-const PORT = 3000 // will use env variable later
+const PORT = 3000 ?? process.env.PORT // will use env variable later
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

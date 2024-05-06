@@ -10,7 +10,7 @@
 // }
 
 // change to use dot env later!
-const ROOT = 'http://localhost:3000/api/v1'
+const ROOT = import.meta.env.VITE_API_ROOT;
 
 export async function rest(url: string, data?: {}, method?: string) {
   const response = await fetch(ROOT + url, {
