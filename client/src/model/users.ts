@@ -101,7 +101,7 @@ export async function createUser(user: User) {
 //   return data.users.find(u => u.id === id);
 // }
 
-export async function getUserByID(id: number) {
-  const response = await rest("/users/getUserByID", { id }, "GET")
+export async function getUserByID(id: number | any) {
+  const response = await rest("/users/getUserByID", { id }, "POST")
   return response
 }

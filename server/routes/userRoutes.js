@@ -19,7 +19,7 @@ app
 
 .post("/createUser", userController.createUser)
 
-.get("/getUserByID", userController.getUserById)
+.post("/getUserByID", userController.getUserById)
 
 
 module.exports = app

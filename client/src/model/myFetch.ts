@@ -9,8 +9,11 @@
 //     .then(x => x.json())
 // }
 
+// change to use dot env later!
+const ROOT = 'http://localhost:3000/api/v1'
+
 export async function rest(url: string, data?: {}, method?: string) {
-  const response = await fetch('http://localhost:3000'+url, {
+  const response = await fetch(ROOT + url, {
     method: method,
     headers: {
       "Content-Type": "application/json",

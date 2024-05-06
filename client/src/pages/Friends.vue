@@ -1,7 +1,22 @@
 <script setup lang="ts">
-import { getUsers, getUserByID } from '../model/users';
-import { ref } from 'vue';
+import { getUsers, getUserByID, type User, type Activity } from '../model/users';
+import { onMounted, ref } from 'vue';
 import { getSession } from '@/viewModel/session';
+
+const activities = ref([] as Activity[]);
+const friends = ref([] as User[]);
+onMounted(async () => {
+  const friendsList = session.user?.friends;
+  if (friendsList) {
+    friendsList.forEach(async (id) => {
+      const user = await getUserByID(id);
+      activities.value.push(user.activities)
+      friends.value.push(user);
+      console.log({ friends: friends.value[0] });
+      console.log({ activities: activities.value[0] });
+    });
+  }
+});
 
 const modal = ref(false);
 function toggleModal() {
@@ -10,6 +25,8 @@ function toggleModal() {
 }
 const users = getUsers();
 const session = getSession();
+
+const refUser = ref(null);
 </script>
 
 <template>
@@ -18,8 +35,8 @@ const session = getSession();
   </div>
   <div class="columns is-centered">
     <div class="column is-half">
-      <div v-for="id in session.user?.friends" :key="id">
-        <div v-for="activity in getUserByID(id)?.activities" :key="activity.activityID">
+      <div v-for="friend in friends">
+        <div v-for="activity in activities" :key="activity.activityID">
             <div class="card-image">
               <figure class="image is-3by2">
                 <img :src=activity.image alt="Activity image">
@@ -29,11 +46,11 @@ const session = getSession();
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-48x48">
-                    <img :src="getUserByID(id)?.profileImage" alt="Profile image">
+                    <img :src="friend?.profileImage" alt="Profile image">
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4">{{ getUserByID(id)?.firstName }} {{ getUserByID(id)?.lastName }}</p>
+                  <p class="title is-4">{{ friend?.firstName }} {{ friend?.lastName }}</p>
                 </div>
               </div>
 
