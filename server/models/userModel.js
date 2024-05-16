@@ -30,6 +30,12 @@ async function getUserById(id) {
     const data = await getData();
     return data.users.find(user => user.id === id);
 }
+
+async function getUserByFirstName(name){
+    const data = await getData();
+    return data.users.filter(user => user.firstName.toLowerCase().includes(name.toLowerCase()));
+}
+
 //might need later
 async function searchUsers(keyword) {
     const data = await getData();
@@ -90,6 +96,7 @@ async function createUser(user) {
 module.exports = {
     getUsers,
     getUserById,
+    getUserByFirstName,
     searchUsers,
     editUser,
     deleteUser,

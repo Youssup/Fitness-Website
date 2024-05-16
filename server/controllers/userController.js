@@ -117,3 +117,13 @@ exports.getUserById = async (req, res) => {
         res.status(401).send("could not get user")
     }
 }
+
+exports.getUserByFirstName = async (req, res) => {
+    try {
+        const firstName = req.body.firstName
+        res.send(await users.getUserByFirstName(firstName))
+    }
+    catch (error) {
+        res.status(401).send("could not get user")
+    }
+}

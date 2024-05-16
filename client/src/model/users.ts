@@ -105,3 +105,8 @@ export async function getUserByID(id: number | any) {
   const response = await rest("/users/getUserByID", { id }, "POST")
   return response
 }
+
+export async function getUserByFirstName(firstName: string) {
+  const response = await rest("/users/getUserByFirstName", { firstName }, "POST")
+  return response
+}

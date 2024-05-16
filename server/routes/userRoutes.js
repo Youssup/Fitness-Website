@@ -5,7 +5,9 @@ const userController = require("../controllers/userController")
 app
 .get("/", userController.getUsers)
 
-.get("/search", userController.searchUsers)
+.post("/search", userController.searchUsers)
+
+.post("/getUserByFirstName", userController.getUserByFirstName)
 
 .put("/editUser", userController.editUser)
 
