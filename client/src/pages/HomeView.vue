@@ -42,8 +42,7 @@ const showData = () => {
           </o-field>
           <p><b>Selected:</b> {{ selected?.firstName }}</p>
           <div v-if="selected">
-            <h3>firstName{{ selected.firstName }}</h3>
-            <h3>lastName{{ selected.lastName }}</h3>
+            <h1 class="title">Activities</h1>
             <div v-for="activity in selected.activities" :key="activity.activityID" class="card"
                 style="margin-top: 20px;">
                 <div class="card-content">
@@ -67,5 +66,8 @@ const showData = () => {
 </template>
 
 <style>
-
+.title {
+  width: 100%;
+  text-align: center;
+}
 </style>
