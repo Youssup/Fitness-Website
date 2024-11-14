@@ -109,4 +109,9 @@ function createNewUser(user: User) {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+</style>
