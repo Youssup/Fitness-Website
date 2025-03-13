@@ -13,21 +13,21 @@ Vue.js, HTML/CSS, Bulma, Node.js, Express.js, and JavaScript/TypeScript
 To set up the project locally, follow these steps:
 
 Clone the repository:
-
+```
 git clone https://github.com/Youssup/Fitness-Website
-
+```
 Navigate to the project directory:
-
+```
 cd client
-
+```
 Install dependencies for the server:
-
+```
 npm install
-
+```
 Start the development server:
-
+```
 npm run dev
-
+```
 ## Usage
 
 After installation, you can access the application by navigating to http://localhost:8000 (May differ depending on specified port) in your web browser. From there, you can create an account, log your fitness activities, set goals, and monitor your progress. All data is local!
